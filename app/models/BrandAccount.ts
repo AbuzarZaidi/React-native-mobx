@@ -95,9 +95,11 @@ export const BrandAccountModel = types
 
       const followers = JSON.parse(response).public_metrics.followers_count.toString();
       /* store.setProp("socialTwitterFollowers", followers.toString()); */
-      this.setBrandAccountSocialFacebookPage(followers);
+      // this.setBrandAccountSocialFacebookPage(followers);
+      this.setBrandAccountSocialTwitterFollowers(followers);
       // console.log("Followers:" + store.socialTwitterFollowers);
       console.log("Followers String:" + followers);
+      console.log(JSON.parse(response))
       return followers;
 
       }

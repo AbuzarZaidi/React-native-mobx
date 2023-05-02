@@ -45,6 +45,8 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
     brandAccount.setProp("name", brandAccountName);
     brandAccount.setProp("websiteUrl", brandAccountWebsiteUrl);
     brandAccount.setProp("category", brandAccountCategory);
+    brandAccount.setProp("keywordPrimary", brandAccountKeywordPrimary);
+    brandAccount.setProp("keywordSecondary", brandAccountKeywordSecondary);
     console.log(brandAccountList);
     /* console.log("ID: " + brandAccount); */
     /* console.log("ID: " + brandAccount); */

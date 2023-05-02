@@ -1,12 +1,14 @@
 /* eslint-disable react-native/no-unused-styles */
 import { observer } from "mobx-react-lite"
+import { useStores } from "../models"
 import React, { FC } from "react"
 import { TextStyle, View, ViewStyle, StyleSheet, useWindowDimensions } from "react-native"
 import { Button, Screen, Text } from "../components"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { TabView, SceneMap } from 'react-native-tab-view';
-
+import { BrandAccountListModel } from "../models/BrandAccountList";
+import { BrandAccountModel } from "../models/BrandAccount";
 interface UnauthAddAccountBrandReviewScreenProps extends AppStackScreenProps <"UnauthAddAccountBrandReview"> {}
 
 const FirstRoute = () => (
@@ -35,10 +37,10 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
   _props,
 ) {
   const { navigation } = _props
-
-
-  
-
+  const brandAccountStore = BrandAccountListModel.create();
+  const { brandAccount, brandAccountList } = useStores();
+  console.log("review Page")
+  console.log(brandAccount)
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
@@ -47,7 +49,17 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
     { key: 'third', title: 'Finacials' },
     { key: 'fourth', title: 'Goals' },
   ]);
-
+  const addBrandToList = () => {
+    const data = brandAccount.toJSON(); 
+    brandAccount.resetBrandAccount(); 
+  
+    const newBrandAccount = BrandAccountModel.create(data); 
+    console.log("addBrandListData1")
+    console.log(newBrandAccount)
+    brandAccountStore.addBrandAccount(newBrandAccount); 
+    console.log("addBrandListData2")
+    console.log(brandAccountList)
+  }
   return (
     <Screen
       preset="scroll"
@@ -81,32 +93,32 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
               style={$reviewCategoryRow}
             >
               <Text style={styles.textLabel}>Brand Name</Text>
-              <Text style={styles.textValue}>Brand Value</Text>
+              <Text style={styles.textValue}>{brandAccount.name}</Text>
             </View>
             <View
               style={$reviewCategoryRow}
             >
               <Text style={styles.textLabel}>Website</Text>
-              <Text style={styles.textValue}>Website</Text>
+              <Text style={styles.textValue}>{brandAccount.websiteUrl}</Text>
               
             </View>
             <View
               style={$reviewCategoryRow}
             >
               <Text style={styles.textLabel}>Category</Text>
-              <Text style={styles.textValue}>Category</Text>
+              <Text style={styles.textValue}>{brandAccount.category}</Text>
             </View>
             <View
               style={$reviewCategoryRow}
             >
               <Text style={styles.textLabel}>Keyword 1</Text>
-              <Text style={styles.textValue}>Keyword 1</Text>
+              <Text style={styles.textValue}>{brandAccount.keywordPrimary}</Text>
             </View>
             <View
               style={$reviewCategoryRow}
             >
               <Text style={styles.textLabel}>Keyword 2</Text>
-              <Text style={styles.textValue}>Keyword 2</Text>
+              <Text style={styles.textValue}>{brandAccount.keywordSecondary}</Text>
             </View>
           </View>
           
@@ -116,31 +128,31 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
             style={$reviewCategoryRow}
           >
             <Text style={styles.textLabel}>Twitter</Text>
-            <Text style={styles.textValue}>@[profile]</Text>
+            <Text style={styles.textValue}>@{brandAccount.socialTwitter}</Text>
           </View>
           <View
             style={$reviewCategoryRow}
           >
             <Text style={styles.textLabel}>LinkedIn</Text>
-            <Text style={styles.textValue}>in/[profile]</Text>
+            <Text style={styles.textValue}>in/{brandAccount.socialLinkedInProfile}</Text>
           </View>
           <View
             style={$reviewCategoryRow}
           >
             <Text style={styles.textLabel}>TikTok</Text>
-            <Text style={styles.textValue}>@[profile]</Text>
+            <Text style={styles.textValue}>@{brandAccount.socialTikTok}</Text>
           </View>
           <View
             style={$reviewCategoryRow}
           >
             <Text style={styles.textLabel}>Instagram</Text>
-            <Text style={styles.textValue}>@[profile]</Text>
+            <Text style={styles.textValue}>@{brandAccount.socialInstagram}</Text>
           </View>
           <View
             style={$reviewCategoryRow}
           >
             <Text style={styles.textLabel}>Facebook</Text>
-            <Text style={styles.textValue}>[profile]</Text>
+            <Text style={styles.textValue}>{brandAccount.socialFacebookPage}</Text>
           </View>
 
           <Text style={styles.textCategoryHeader}>Financials</Text>
@@ -203,7 +215,7 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
             testID="landing-button"
             style={$tapButton}
             preset="reversed"
-            onPress={() =>  navigation.navigate("UnauthEngageDashboard")}
+            onPress={() => {addBrandToList(); navigation.navigate("UnauthEngageDashboard")}}
           >
             Submit
           </Button>

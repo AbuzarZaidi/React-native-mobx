@@ -20,8 +20,10 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
   const { brandAccount, brandAccountList } = useStores();
 
   /* console.log(brandAccount); */
+  console.log("brandAccount in dashboard");
   console.log(brandAccount);
   /* console.log(brandAccount.id); */
+  console.log("brandAccountList in dashboard")
   console.log(brandAccountList);
   /* console.log(brandAccountListModel.brandAccountItems()); */
   

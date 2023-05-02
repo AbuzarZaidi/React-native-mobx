@@ -10,7 +10,10 @@ import { withSetPropAction } from "./helpers/withSetPropAction"
   .actions(withSetPropAction)
   .actions((store) => ({
     addBrandAccount(brandAccount: BrandAccount) {
+      console.log('brandAccount in store')
+      console.log(brandAccount)
       store.brandAccountItems.push(brandAccount)
+     
     },
     removeBrandAccount(brandAccount: BrandAccount) {
       destroy(brandAccount)

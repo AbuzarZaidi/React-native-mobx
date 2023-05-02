@@ -14,6 +14,7 @@ export const RootStoreModel = types.model("RootStore").props({
   brandAccountList: types.optional(types.array(BrandAccountModel), []),
 })
 
+
 /**
  * The RootStore instance.
  */
