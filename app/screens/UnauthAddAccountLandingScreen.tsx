@@ -24,7 +24,7 @@ export const UnauthAddAccountLandingScreen: FC<UnauthAddAccountLandingScreenProp
 ) {
   const { navigation } = _props
   const { brandAccount, brandAccountList } = useStores();
-
+console.log("Landing page")
   console.log(brandAccount);
   console.log(brandAccountList);
 

@@ -8,6 +8,7 @@ import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import ProgressBar from 'react-native-progress/Bar';
 import RNPickerSelect from 'react-native-picker-select';
+import { BrandAccountListModel } from "../models/BrandAccountList";
 import { Ionicons } from '@expo/vector-icons';
 /* import { BrandAccountList } from "app/models/BrandAccount" */
 
@@ -18,9 +19,11 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
   _props,
 ) {
   const { navigation } = _props;
+  const brandAccountStore = BrandAccountListModel.create();
   const { brandAccount, brandAccountList } = useStores();
   console.log("basic")
   console.log(brandAccountList )
+  console.log(JSON.stringify(brandAccountStore.brandAccountItems))
   const placeholder = {
     label: 'Select a brand category...',
     value: "",

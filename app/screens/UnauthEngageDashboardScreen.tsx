@@ -1,11 +1,12 @@
 import { observer } from "mobx-react-lite"
 import { useStores } from "../models"
-import React, { FC, } from "react"
+import React, { FC,useState } from "react"
 import { View, StyleSheet, ViewStyle } from "react-native"
 import { Button, Card, Screen, Text } from "../components"
 // import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
 // import { useNavigation } from "@react-navigation/native"
+import { BrandAccountListModel } from "../models/BrandAccountList";
 // import { useStores } from "app/models"
 import { colors, spacing } from "../theme"
 import { ScrollView } from "react-native-gesture-handler"
@@ -17,8 +18,10 @@ interface UnauthEngageDashboardScreenProps extends AppStackScreenProps <"UnauthE
 export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> = observer(function UnauthEngageDashboardScreen(_props) {
   /* const swiperRef = useRef(null); */
   const { navigation } = _props;
+  const brandAccountStore = BrandAccountListModel.create();
   const { brandAccount, brandAccountList } = useStores();
 
+const [brandsList,setBrandList]=useState(JSON.stringify(brandAccountStore.brandAccountItems))
   /* console.log(brandAccount); */
   console.log("brandAccount in dashboard");
   console.log(brandAccount);
@@ -26,7 +29,7 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
   console.log("brandAccountList in dashboard")
   console.log(brandAccountList);
   /* console.log(brandAccountListModel.brandAccountItems()); */
-  
+  console.log(JSON.stringify(brandAccountStore.brandAccountItems))
 
   return (
     <Screen
@@ -105,6 +108,22 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
             </View>
           }
         />
+        {/* {brandsList.map((brandAccount) => (
+        <Card
+          key={brandAccount.id} // Make sure to provide a unique key for each card
+          style={$cardStyle}
+          HeadingComponent={
+            <View style={$summaryBodyHeader}>
+              <Text weight="bold">{brandAccount.name}</Text>
+            </View>
+          }
+          ContentComponent={
+            <View style={$summaryBodyContent}>
+              <Text>Followers: {brandAccount.followers}</Text>
+            </View>
+          }
+        />
+      ))} */}
         <Card
           style={$cardStyleEmpty}
           ContentComponent={
@@ -121,8 +140,10 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
                 style={styles.textCardEmptyBody}
               >
                 You have no personal brand or business accounts added to value and monitor.
-                <Text>{JSON.stringify(brandAccount)}</Text>
-            <Text>{JSON.stringify(brandAccountList)}</Text>
+                {/* <Text>{JSON.stringify(brandAccount)}</Text>
+            <Text>{JSON.stringify(brandAccountList)}</Text> */}
+            <Text> {JSON.stringify(brandAccountStore.brandAccountItems)}</Text>
+          
               </Text>
               <Button
                 preset="default"

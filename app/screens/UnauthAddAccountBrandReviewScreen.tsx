@@ -69,12 +69,13 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
      
     console.log("addBrandListData1")
     console.log(newBrandAccount)
-    
+    console.log(JSON.stringify(brandAccountStore.brandAccountItems))
     brandAccountStore.addBrandAccount(newBrandAccount);
     // brandAccountStore.addBrandAccount(newBrandAccount);
     // brandAccountStore.addBrandAccount(newBrandAccount);
     console.log("addBrandListData2")
     console.log(brandAccountList)
+    console.log(JSON.stringify(brandAccountStore.brandAccountItems))
     
   }
   return (
