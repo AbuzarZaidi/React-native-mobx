@@ -50,6 +50,7 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
             preset="heading"
           >
             My Community
+            
           </Text>
         </View>
         <View
@@ -82,6 +83,7 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
                 weight="bold"
               >
                 All Accounts
+                
               </Text>
               
               {/* <Icon icon="gear" color={colors.palette.blue100} size={30}/> */}
@@ -95,6 +97,7 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
                 <Text>
                   Followers
                 </Text>
+              
                 <Text>
                   - - - - -
                 </Text>
@@ -118,6 +121,8 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
                 style={styles.textCardEmptyBody}
               >
                 You have no personal brand or business accounts added to value and monitor.
+                <Text>{JSON.stringify(brandAccount)}</Text>
+            <Text>{JSON.stringify(brandAccountList)}</Text>
               </Text>
               <Button
                 preset="default"

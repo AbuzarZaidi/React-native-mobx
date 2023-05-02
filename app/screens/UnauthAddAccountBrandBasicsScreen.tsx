@@ -19,6 +19,8 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
 ) {
   const { navigation } = _props;
   const { brandAccount, brandAccountList } = useStores();
+  console.log("basic")
+  console.log(brandAccountList )
   const placeholder = {
     label: 'Select a brand category...',
     value: "",

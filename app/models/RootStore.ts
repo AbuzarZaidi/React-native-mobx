@@ -12,6 +12,7 @@ export const RootStoreModel = types.model("RootStore").props({
   episodeStore: types.optional(EpisodeStoreModel, {}), // @demo remove-current-line
   brandAccount: types.optional(BrandAccountModel, {}),
   brandAccountList: types.optional(types.array(BrandAccountModel), []),
+  brandAccounts: types.optional(types.array(BrandAccountModel), []),
 })
 
 

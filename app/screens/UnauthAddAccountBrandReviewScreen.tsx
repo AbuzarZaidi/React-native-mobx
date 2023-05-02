@@ -8,6 +8,7 @@ import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { TabView, SceneMap } from 'react-native-tab-view';
 import { BrandAccountListModel } from "../models/BrandAccountList";
+// import { BrandAccountListModel } from "../models/NewBrandAccountList";
 import { BrandAccountModel } from "../models/BrandAccount";
 interface UnauthAddAccountBrandReviewScreenProps extends AppStackScreenProps <"UnauthAddAccountBrandReview"> {}
 
@@ -50,15 +51,31 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
     { key: 'fourth', title: 'Goals' },
   ]);
   const addBrandToList = () => {
-    const data = brandAccount.toJSON(); 
-    brandAccount.resetBrandAccount(); 
-  
-    const newBrandAccount = BrandAccountModel.create(data); 
+    const newBrandAccount = BrandAccountModel.create({
+      category: brandAccount.category,
+      enclosure: brandAccount.enclosure,
+      id: brandAccount.id,
+      keywordPrimary: brandAccount.keywordPrimary,
+      keywordSecondary: brandAccount.keywordSecondary,
+      name: brandAccount.name,
+      socialFacebookPage: brandAccount.socialFacebookPage,
+      socialInstagram: brandAccount.socialInstagram,
+      socialLinkedInProfile: brandAccount.socialLinkedInProfile,
+      socialTikTok: brandAccount.socialTikTok,
+      socialTwitter: brandAccount.socialTwitter,
+      socialTwitterFollowers: brandAccount.socialTwitterFollowers,
+      websiteUrl: brandAccount.websiteUrl
+    }); 
+     
     console.log("addBrandListData1")
     console.log(newBrandAccount)
-    brandAccountStore.addBrandAccount(newBrandAccount); 
+    
+    brandAccountStore.addBrandAccount(newBrandAccount);
+    // brandAccountStore.addBrandAccount(newBrandAccount);
+    // brandAccountStore.addBrandAccount(newBrandAccount);
     console.log("addBrandListData2")
     console.log(brandAccountList)
+    
   }
   return (
     <Screen
