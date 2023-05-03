@@ -6,7 +6,7 @@ import { withSetPropAction } from "./helpers/withSetPropAction"
 import { translate } from "../i18n" */
 
 interface Enclosure {
-  id: number,
+  id: string,
   name: string
   websiteUrl: string
   category: string
@@ -25,7 +25,7 @@ interface Enclosure {
 export const BrandAccountModel = types
   .model("BrandAccount")
   .props({
-    id: Date.now(),
+    id: "",
     name: "",
     websiteUrl: "",
     category: "",
@@ -42,6 +42,8 @@ export const BrandAccountModel = types
   .actions(withSetPropAction)
   .actions((store) => ({
     setBrandAccountName(value?: string) {
+      // store.id=Date.now().toString();
+      
       store.name = value
     },
     setBrandAccountWebsiteUrl(value?: string) {
@@ -75,7 +77,7 @@ export const BrandAccountModel = types
       store.socialTwitterFollowers = value;
     },
     resetBrandAccount() {
-      store.id = 0;
+      store.id = "";
       store.name = "";
       store.websiteUrl = "";
       store.category = "";

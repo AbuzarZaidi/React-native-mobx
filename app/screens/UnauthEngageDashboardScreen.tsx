@@ -19,18 +19,19 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
   /* const swiperRef = useRef(null); */
   const { navigation } = _props;
   const brandAccountStore = BrandAccountListModel.create();
-  const { brandAccount, brandAccountList } = useStores();
+  const { brandAccount, brandAccountList,inputStore } = useStores();
 
-const [brandsList,setBrandList]=useState(JSON.stringify(brandAccountStore.brandAccountItems))
+// const [brandsList,setBrandList]=useState(JSON.stringify(brandAccountStore.brandAccountItems))
   /* console.log(brandAccount); */
   console.log("brandAccount in dashboard");
   console.log(brandAccount);
   /* console.log(brandAccount.id); */
   console.log("brandAccountList in dashboard")
-  console.log(brandAccountList);
+  // console.log(brandAccountList);
   /* console.log(brandAccountListModel.brandAccountItems()); */
-  console.log(JSON.stringify(brandAccountStore.brandAccountItems))
-
+  // console.log(JSON.stringify(brandAccountStore.brandAccountItems))
+console.log("testing")
+console.log(JSON.stringify(inputStore))
   return (
     <Screen
       /* safeAreaEdges={["top"]} */
@@ -108,22 +109,22 @@ const [brandsList,setBrandList]=useState(JSON.stringify(brandAccountStore.brandA
             </View>
           }
         />
-        {/* {brandsList.map((brandAccount) => (
+        {inputStore.inputList.map((brandAccount) => (
         <Card
-          key={brandAccount.id} // Make sure to provide a unique key for each card
+          key={brandAccount.new_id} // Make sure to provide a unique key for each card
           style={$cardStyle}
           HeadingComponent={
             <View style={$summaryBodyHeader}>
-              <Text weight="bold">{brandAccount.name}</Text>
+              <Text weight="bold">{brandAccount.new_name}</Text>
             </View>
           }
           ContentComponent={
             <View style={$summaryBodyContent}>
-              <Text>Followers: {brandAccount.followers}</Text>
+              <Text>Followers: {brandAccount.new_websiteUrl}</Text>
             </View>
           }
         />
-      ))} */}
+      ))}
         <Card
           style={$cardStyleEmpty}
           ContentComponent={

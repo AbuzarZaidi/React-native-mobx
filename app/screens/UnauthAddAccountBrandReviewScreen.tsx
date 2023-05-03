@@ -39,7 +39,7 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
 ) {
   const { navigation } = _props
   const brandAccountStore = BrandAccountListModel.create();
-  const { brandAccount, brandAccountList } = useStores();
+  const { brandAccount, brandAccountList,inputStore } = useStores();
   console.log("review Page")
   console.log(brandAccount)
   const layout = useWindowDimensions();
@@ -51,32 +51,47 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
     { key: 'fourth', title: 'Goals' },
   ]);
   const addBrandToList = () => {
-    const newBrandAccount = BrandAccountModel.create({
-      category: brandAccount.category,
-      enclosure: brandAccount.enclosure,
-      id: brandAccount.id,
-      keywordPrimary: brandAccount.keywordPrimary,
-      keywordSecondary: brandAccount.keywordSecondary,
-      name: brandAccount.name,
-      socialFacebookPage: brandAccount.socialFacebookPage,
-      socialInstagram: brandAccount.socialInstagram,
-      socialLinkedInProfile: brandAccount.socialLinkedInProfile,
-      socialTikTok: brandAccount.socialTikTok,
-      socialTwitter: brandAccount.socialTwitter,
-      socialTwitterFollowers: brandAccount.socialTwitterFollowers,
-      websiteUrl: brandAccount.websiteUrl
-    }); 
-     
-    console.log("addBrandListData1")
-    console.log(newBrandAccount)
-    console.log(JSON.stringify(brandAccountStore.brandAccountItems))
-    brandAccountStore.addBrandAccount(newBrandAccount);
+    // const newBrandAccount = BrandAccountModel.create({
+    //   category: brandAccount.category,
+    //   enclosure: brandAccount.enclosure,
+    //   id: brandAccount.id,
+    //   keywordPrimary: brandAccount.keywordPrimary,
+    //   keywordSecondary: brandAccount.keywordSecondary,
+    //   name: brandAccount.name,
+    //   socialFacebookPage: brandAccount.socialFacebookPage,
+    //   socialInstagram: brandAccount.socialInstagram,
+    //   socialLinkedInProfile: brandAccount.socialLinkedInProfile,
+    //   socialTikTok: brandAccount.socialTikTok,
+    //   socialTwitter: brandAccount.socialTwitter,
+    //   socialTwitterFollowers: brandAccount.socialTwitterFollowers,
+    //   websiteUrl: brandAccount.websiteUrl
+    // }); 
+    // brandAccountList.addInput({ name:brandAccountName, email:brandAccountWebsiteUrl });
+    // console.log("addBrandListData1")
+    // console.log(newBrandAccount)
+    // console.log(JSON.stringify(brandAccountStore.brandAccountItems))
     // brandAccountStore.addBrandAccount(newBrandAccount);
-    // brandAccountStore.addBrandAccount(newBrandAccount);
-    console.log("addBrandListData2")
-    console.log(brandAccountList)
-    console.log(JSON.stringify(brandAccountStore.brandAccountItems))
     
+    // brandAccountStore.addBrandAccount(newBrandAccount);
+    // brandAccountStore.addBrandAccount(newBrandAccount);
+    // console.log("addBrandListData2")
+    // console.log(brandAccountList)
+    // console.log(JSON.stringify(brandAccountStore.brandAccountItems))
+    inputStore.addInput({ 
+      new_id:brandAccount.id,
+      new_name:brandAccount.name,
+      new_websiteUrl:brandAccount.websiteUrl,
+      new_category:brandAccount.category,
+      new_keywordPrimary:brandAccount.keywordPrimary,
+      new_keywordSecondary:brandAccount.keywordSecondary,
+      new_socialTwitter:brandAccount.socialTwitter,
+      new_socialLinkedInProfile:brandAccount.socialLinkedInProfile,
+      new_socialInstagram:brandAccount.socialInstagram,
+      new_socialTikTok:brandAccount.socialTikTok,
+      new_socialFacebookPage:brandAccount.socialFacebookPage,
+
+    });
+    brandAccount.resetBrandAccount();
   }
   return (
     <Screen

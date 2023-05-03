@@ -38,7 +38,7 @@ export const UnauthAddAccountBrandSocialsScreen: FC<UnauthAddAccountBrandSocials
     brandAccount.setProp("socialInstagram", brandAccountSocialInstagram);
     brandAccount.setProp("socialTikTok", brandAccountSocialTikTok);
     brandAccount.setProp("socialFacebookPage", brandAccountSocialFacebookPage);
-    
+    // inputStore.addInput({ name:brandAccountSocialTwitter, email:brandAccountSocialLinkedInProfile });
 
     if(brandAccountSocialTwitter){
       brandAccount.getFollowers(brandAccountSocialTwitter);/* 

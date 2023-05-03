@@ -20,7 +20,7 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
 ) {
   const { navigation } = _props;
   const brandAccountStore = BrandAccountListModel.create();
-  const { brandAccount, brandAccountList } = useStores();
+  const { brandAccount, brandAccountList,inputStore  } = useStores();
   console.log("basic")
   console.log(brandAccountList )
   console.log(JSON.stringify(brandAccountStore.brandAccountItems))
@@ -47,12 +47,14 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
   const handleSaveContinue = () => {
     // Create a brandAccountItem 
     // Add brandAccountItem to the brandAccountList
+    brandAccount.setProp("id", Date.now().toString());
     brandAccount.setProp("name", brandAccountName);
     brandAccount.setProp("websiteUrl", brandAccountWebsiteUrl);
     brandAccount.setProp("category", brandAccountCategory);
     brandAccount.setProp("keywordPrimary", brandAccountKeywordPrimary);
     brandAccount.setProp("keywordSecondary", brandAccountKeywordSecondary);
     console.log(brandAccountList);
+    // inputStore.addInput({ name:brandAccountName, email:brandAccountWebsiteUrl });
     /* console.log("ID: " + brandAccount); */
     /* console.log("ID: " + brandAccount); */
     navigation.navigate("UnauthAddAccountBrandSocials")
@@ -60,6 +62,7 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
 
   const handleCloseCancel = () => {
     brandAccount.resetBrandAccount();
+    inputStore.reset();
     /* console.log(brandAccount); */
     /* brandAccountList.deleteBrandAccount(brandAccount); */
     /* console.log(brandAccount); */
