@@ -89,6 +89,7 @@ export const UnauthAddAccountBrandReviewScreen: FC<UnauthAddAccountBrandReviewSc
       new_socialInstagram:brandAccount.socialInstagram,
       new_socialTikTok:brandAccount.socialTikTok,
       new_socialFacebookPage:brandAccount.socialFacebookPage,
+      new_socialTwitterFollowers:brandAccount.socialTwitterFollowers,
 
     });
     brandAccount.resetBrandAccount();

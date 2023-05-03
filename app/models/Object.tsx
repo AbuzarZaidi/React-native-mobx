@@ -13,6 +13,7 @@ export const InputModel = types.model('InputModel', {
     new_socialInstagram: types.string,
     new_socialTikTok: types.string,
     new_socialFacebookPage: types.string,
+    new_socialTwitterFollowers: types.string,
 });
 
 export const InputStoreModel = types
@@ -22,11 +23,17 @@ export const InputStoreModel = types
   })
   .actions((store) => ({
     addInput(input: { new_id:string;new_name: string; new_websiteUrl: string;new_category:string;new_keywordPrimary:string;new_keywordSecondary:string;new_socialTwitter:string;
-      new_socialLinkedInProfile:string;new_socialInstagram:string;new_socialTikTok:string;new_socialFacebookPage:string; }) {
+      new_socialLinkedInProfile:string;new_socialInstagram:string;new_socialTikTok:string;new_socialFacebookPage:string;new_socialTwitterFollowers:string }) {
       store.inputList.push(input);
     },
     reset() {
       store.inputList.clear();
+    },
+    removeInput(id: string) {
+      const index = store.inputList.findIndex((input) => input.new_id === id);
+      if (index >= 0) {
+        store.inputList.splice(index, 1);
+      }
     },
   }));
 

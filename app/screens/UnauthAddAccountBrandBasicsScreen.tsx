@@ -21,9 +21,7 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
   const { navigation } = _props;
   const brandAccountStore = BrandAccountListModel.create();
   const { brandAccount, brandAccountList,inputStore  } = useStores();
-  console.log("basic")
-  console.log(brandAccountList )
-  console.log(JSON.stringify(brandAccountStore.brandAccountItems))
+ 
   const placeholder = {
     label: 'Select a brand category...',
     value: "",
@@ -41,7 +39,6 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
   const [brandAccountKeywordPrimary, setBrandAccountKeywordPrimary] = useState(brandAccount.keywordPrimary === "" ? "" : brandAccount.keywordPrimary);
   const [brandAccountKeywordSecondary, setBrandAccountKeywordSecondary] = useState(brandAccount.keywordSecondary === "" ? "" : brandAccount.keywordSecondary);
 
-  /* console.log(brandAccount); */
   
 
   const handleSaveContinue = () => {
@@ -53,8 +50,7 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
     brandAccount.setProp("category", brandAccountCategory);
     brandAccount.setProp("keywordPrimary", brandAccountKeywordPrimary);
     brandAccount.setProp("keywordSecondary", brandAccountKeywordSecondary);
-    console.log(brandAccountList);
-    // inputStore.addInput({ name:brandAccountName, email:brandAccountWebsiteUrl });
+    
     /* console.log("ID: " + brandAccount); */
     /* console.log("ID: " + brandAccount); */
     navigation.navigate("UnauthAddAccountBrandSocials")

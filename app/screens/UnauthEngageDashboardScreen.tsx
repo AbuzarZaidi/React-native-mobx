@@ -1,13 +1,15 @@
 import { observer } from "mobx-react-lite"
 import { useStores } from "../models"
 import React, { FC,useState } from "react"
-import { View, StyleSheet, ViewStyle } from "react-native"
+import { View, StyleSheet, ViewStyle,TouchableOpacity } from "react-native"
 import { Button, Card, Screen, Text } from "../components"
 // import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
 // import { useNavigation } from "@react-navigation/native"
 import { BrandAccountListModel } from "../models/BrandAccountList";
 // import { useStores } from "app/models"
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { colors, spacing } from "../theme"
 import { ScrollView } from "react-native-gesture-handler"
 import { LinearGradient } from 'expo-linear-gradient';
@@ -20,18 +22,16 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
   const { navigation } = _props;
   const brandAccountStore = BrandAccountListModel.create();
   const { brandAccount, brandAccountList,inputStore } = useStores();
-
-// const [brandsList,setBrandList]=useState(JSON.stringify(brandAccountStore.brandAccountItems))
-  /* console.log(brandAccount); */
-  console.log("brandAccount in dashboard");
-  console.log(brandAccount);
-  /* console.log(brandAccount.id); */
-  console.log("brandAccountList in dashboard")
-  // console.log(brandAccountList);
-  /* console.log(brandAccountListModel.brandAccountItems()); */
-  // console.log(JSON.stringify(brandAccountStore.brandAccountItems))
-console.log("testing")
-console.log(JSON.stringify(inputStore))
+const handleDeleteAccount=(id:string)=>{
+  inputStore.removeInput(id)
+}
+//   console.log("brandAccount in dashboard");
+//   console.log(brandAccount);
+  
+//   console.log("brandAccountList in dashboard")
+  
+// console.log("testing")
+// console.log(JSON.stringify(inputStore))
   return (
     <Screen
       /* safeAreaEdges={["top"]} */
@@ -109,53 +109,61 @@ console.log(JSON.stringify(inputStore))
             </View>
           }
         />
-        {inputStore.inputList.map((brandAccount) => (
+        {inputStore.inputList.length>0?inputStore.inputList.map((brandAccount) => (
         <Card
           key={brandAccount.new_id} // Make sure to provide a unique key for each card
           style={$cardStyle}
           HeadingComponent={
-            <View style={$summaryBodyHeader}>
-              <Text weight="bold">{brandAccount.new_name}</Text>
+            <View style={$summaryBodyCardHeader}>
+
+              <Text  style={{color:"#2962FF",fontSize:20}}>{brandAccount.new_name}</Text>
+              <TouchableOpacity onPress={() => handleDeleteAccount(brandAccount.new_id)}>
+         
+          <MaterialIcons name="delete-outline" size={24} color="black" />
+         
+        </TouchableOpacity>
+
             </View>
           }
           ContentComponent={
             <View style={$summaryBodyContent}>
-              <Text>Followers: {brandAccount.new_websiteUrl}</Text>
+              <Text weight="bold">Followers: </Text>
+              <Text weight="bold">{brandAccount.new_socialTwitterFollowers}</Text>
             </View>
           }
         />
-      ))}
-        <Card
+      )):
+      <Card
+      style={$cardStyleEmpty}
+      ContentComponent={
+        <View
           style={$cardStyleEmpty}
-          ContentComponent={
-            <View
-              style={$cardStyleEmpty}
-            >
-              <Text
-                style={styles.textCardEmptyHeader}
-                weight="bold"
-              >
-                No Accounts
-              </Text>
-              <Text
-                style={styles.textCardEmptyBody}
-              >
-                You have no personal brand or business accounts added to value and monitor.
-                {/* <Text>{JSON.stringify(brandAccount)}</Text>
-            <Text>{JSON.stringify(brandAccountList)}</Text> */}
-            <Text> {JSON.stringify(brandAccountStore.brandAccountItems)}</Text>
-          
-              </Text>
-              <Button
-                preset="default"
-                style={$tapButton}
-                onPress={() =>  navigation.navigate("UnauthAddAccountLanding")}
-              >
-                Add Account
-              </Button>
-            </View>
-          }
-        />
+        >
+          <Text
+            style={styles.textCardEmptyHeader}
+            weight="bold"
+          >
+            No Accounts
+          </Text>
+          <Text
+            style={styles.textCardEmptyBody}
+          >
+            You have no personal brand or business accounts added to value and monitor.
+           
+      
+          </Text>
+          <Button
+            preset="default"
+            style={$tapButton}
+            onPress={() =>  navigation.navigate("UnauthAddAccountLanding")}
+          >
+            Add Account
+          </Button>
+        </View>
+      }
+    />
+      }
+      
       </ScrollView>
     </Screen>
   )
@@ -247,7 +255,17 @@ const $cardStyleEmpty: ViewStyle = {
 
 const $summaryBodyHeader: ViewStyle = {
   /* marginBottom: 20, */
+
   height: 30,
+  borderBottomWidth: 1,
+  borderBottomColor: colors.palette.grey300,
+}
+const $summaryBodyCardHeader: ViewStyle = {
+  /* marginBottom: 20, */
+  flexDirection: "row",
+  justifyContent: "space-between",
+  paddingTop:5,
+  height: 50,
   borderBottomWidth: 1,
   borderBottomColor: colors.palette.grey300,
 }
