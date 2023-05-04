@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useStores } from "../models"
 import React, { FC, useState } from "react"
-import { View, StyleSheet, ViewStyle, TouchableOpacity,Alert } from "react-native"
+import { View, StyleSheet, ViewStyle, TouchableOpacity, Alert } from "react-native"
 import { Button, Card, Screen, Text } from "../components"
 // import { StackScreenProps } from "@react-navigation/stack"
 import { AppStackScreenProps } from "../navigators"
@@ -9,7 +9,7 @@ import { AppStackScreenProps } from "../navigators"
 import { BrandAccountListModel } from "../models/BrandAccountList"
 // import { useStores } from "app/models"
 import { Ionicons } from "@expo/vector-icons"
-import { Feather } from '@expo/vector-icons'; 
+import { Feather } from "@expo/vector-icons"
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors, spacing } from "../theme"
 import { ScrollView } from "react-native-gesture-handler"
@@ -23,51 +23,42 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
     /* const swiperRef = useRef(null); */
     const { navigation } = _props
     const brandAccountStore = BrandAccountListModel.create()
-    const { brandAccount, brandAccountList, inputStore } = useStores()
+    const { brandAccount, brandAccountList } = useStores()
     // const handleDeleteAccount = (id: string) => {
     //   inputStore.removeInput(id)
     // }
-    const handleDeleteAccount = (name:string,id: string) => {
-      Alert.alert(
-        'Confirm Delete',
-        `Are you sure you want to delete ${name} Account?`,
-        [
-          {
-            text: 'Cancel',
-            onPress: () => {},
-            style: 'cancel'
-          },
-          {
-            text: 'Delete',
-            onPress: () => inputStore.removeInput(id)
-          }
-        ]
-      );
-    };
-    const handleEditAccount=(data:any)=>{
+    const handleDeleteAccount = (name: string, id: string) => {
+      Alert.alert("Confirm Delete", `Are you sure you want to delete ${name} Account?`, [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: () =>  brandAccountList.removeInput(id),
+        },
+      ])
+    }
+    const handleEditAccount = (data: any) => {
       console.log(data)
-      brandAccount.setProp("id", data.new_id);
-      brandAccount.setProp("name", data.new_name);
-      brandAccount.setProp("websiteUrl", data.new_websiteUrl);
-      brandAccount.setProp("category",data.new_Category);
-      brandAccount.setProp("keywordPrimary", data. new_keywordPrimary);
-      brandAccount.setProp("keywordSecondary", data.new_keywordSecondary);
-      brandAccount.setProp("socialTwitter", data.new_socialTwitter);
-      brandAccount.setProp("socialLinkedInProfile", data.new_socialLinkedInProfile);
-      brandAccount.setProp("socialInstagram", data.new_socialInstagram);
-      brandAccount.setProp("socialTikTok", data.new_new_socialTikTok);
-      brandAccount.setProp("socialFacebookPage", data.new_socialFacebookPage);
-      brandAccount.setProp("socialTwitterFollowers", data. new_socialTwitterFollowers);
-    
+      brandAccount.setProp("id", data.new_id)
+      brandAccount.setProp("name", data.new_name)
+      brandAccount.setProp("websiteUrl", data.new_websiteUrl)
+      brandAccount.setProp("category", data.new_Category)
+      brandAccount.setProp("keywordPrimary", data.new_keywordPrimary)
+      brandAccount.setProp("keywordSecondary", data.new_keywordSecondary)
+      brandAccount.setProp("socialTwitter", data.new_socialTwitter)
+      brandAccount.setProp("socialLinkedInProfile", data.new_socialLinkedInProfile)
+      brandAccount.setProp("socialInstagram", data.new_socialInstagram)
+      brandAccount.setProp("socialTikTok", data.new_new_socialTikTok)
+      brandAccount.setProp("socialFacebookPage", data.new_socialFacebookPage)
+      brandAccount.setProp("socialTwitterFollowers", data.new_socialTwitterFollowers)
+
       navigation.navigate("UnauthAddAccountBrandBasics")
     }
-    //   console.log("brandAccount in dashboard");
-    //   console.log(brandAccount);
 
-    //   console.log("brandAccountList in dashboard")
-
-    // console.log("testing")
-    console.log(JSON.stringify(inputStore))
+    // console.log(JSON.stringify(inputStore))
     return (
       <Screen
         /* safeAreaEdges={["top"]} */
@@ -113,8 +104,8 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
               </View>
             }
           />
-          {inputStore.inputList.length > 0 ? (
-            inputStore.inputList.map((brandAccount) => (
+          { brandAccountList.inputList.length > 0 ? (
+            brandAccountList.inputList.map((brandAccount) => (
               <Card
                 key={brandAccount.new_id} // Make sure to provide a unique key for each card
                 style={$cardStyle}
@@ -122,16 +113,17 @@ export const UnauthEngageDashboardScreen: FC<UnauthEngageDashboardScreenProps> =
                   <View style={$summaryBodyCardHeader}>
                     <Text style={{ color: "#2962FF", fontSize: 20 }}>{brandAccount.new_name}</Text>
                     <View style={$CardButtons}>
-                    <TouchableOpacity onPress={() => handleDeleteAccount(brandAccount.new_name,brandAccount.new_id)}>
-                      <MaterialIcons name="delete-outline" size={24} color="black" />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleEditAccount(brandAccount)}>
-               
-                      <Feather name="edit-2" size={24} color="black" />
-                    </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() =>
+                          handleDeleteAccount(brandAccount.new_name, brandAccount.new_id)
+                        }
+                      >
+                        <MaterialIcons name="delete-outline" size={24} color="black" />
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={() => handleEditAccount(brandAccount)}>
+                        <Feather name="edit-2" size={24} color="black" />
+                      </TouchableOpacity>
                     </View>
-                   
-                    
                   </View>
                 }
                 ContentComponent={
@@ -266,7 +258,7 @@ const $summaryBodyCardHeader: ViewStyle = {
   borderBottomWidth: 1,
   borderBottomColor: colors.palette.grey300,
 }
-const $CardButtons: ViewStyle={
+const $CardButtons: ViewStyle = {
   flexDirection: "row",
 }
 const $summaryBodyContent: ViewStyle = {

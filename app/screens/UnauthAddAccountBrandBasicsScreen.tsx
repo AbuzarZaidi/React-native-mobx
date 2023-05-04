@@ -42,26 +42,25 @@ export const UnauthAddAccountBrandBasicsScreen: FC<UnauthAddAccountBrandBasicsSc
   
 
   const handleSaveContinue = () => {
-    // Create a brandAccountItem 
-    // Add brandAccountItem to the brandAccountList
-    brandAccount.setProp("id", Date.now().toString());
+    
+    if(brandAccount.id===""){
+      brandAccount.setProp("id", Date.now().toString());
+    }
+
     brandAccount.setProp("name", brandAccountName);
     brandAccount.setProp("websiteUrl", brandAccountWebsiteUrl);
     brandAccount.setProp("category", brandAccountCategory);
     brandAccount.setProp("keywordPrimary", brandAccountKeywordPrimary);
     brandAccount.setProp("keywordSecondary", brandAccountKeywordSecondary);
     
-    /* console.log("ID: " + brandAccount); */
-    /* console.log("ID: " + brandAccount); */
+    
     navigation.navigate("UnauthAddAccountBrandSocials")
   }
 
   const handleCloseCancel = () => {
     brandAccount.resetBrandAccount();
     inputStore.reset();
-    /* console.log(brandAccount); */
-    /* brandAccountList.deleteBrandAccount(brandAccount); */
-    /* console.log(brandAccount); */
+   
     navigation.goBack();
   }
 

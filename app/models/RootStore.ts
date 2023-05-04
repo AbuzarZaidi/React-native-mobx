@@ -3,7 +3,7 @@ import { AuthenticationStoreModel } from "./AuthenticationStore" // @demo remove
 import { EpisodeStoreModel } from "./EpisodeStore" // @demo remove-current-line
 import { BrandAccountModel } from "./BrandAccount"
 import { BrandAccountListModel } from "./BrandAccountList"
-import { InputStoreModel, InputStoreType } from './Object';
+import { InputStoreModel, InputStoreType } from './NewBrandAccountList';
 /**
  * A RootStore model.
  */
@@ -11,9 +11,9 @@ export const RootStoreModel = types.model("RootStore").props({
   authenticationStore: types.optional(AuthenticationStoreModel, {}), // @demo remove-current-line
   episodeStore: types.optional(EpisodeStoreModel, {}), // @demo remove-current-line
   brandAccount: types.optional(BrandAccountModel, {}),
-  brandAccountList: types.optional(types.array(BrandAccountModel), []),
+  // brandAccountList: types.optional(types.array(BrandAccountModel), []),
   // brandAccountList: types.optional(BrandAccountListModel, {}),
-  inputStore: types.optional(InputStoreModel, {}),
+  brandAccountList: types.optional(InputStoreModel, {}),
 })
 
 

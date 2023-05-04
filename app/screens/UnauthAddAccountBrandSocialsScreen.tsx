@@ -28,7 +28,7 @@ export const UnauthAddAccountBrandSocialsScreen: FC<UnauthAddAccountBrandSocials
   const [brandAccountSocialInstagram, setBrandAccountSocialInstagram] = useState(brandAccount.socialInstagram === "" ? "" : brandAccount.socialInstagram);
   const [brandAccountSocialTikTok, setBrandAccountSocialTikTok] = useState(brandAccount.socialTikTok === "" ? "" : brandAccount.socialTikTok);
   const [brandAccountSocialFacebookPage, setBrandAccountSocialFacebookPage] = useState(brandAccount.socialFacebookPage === "" ? "" : brandAccount.socialFacebookPage);
-  /* const [brandAccountSocialTwitterFollowers, setBrandAccountSocialTwitterFollowers] = useState(brandAccount.socialTwitterFollowers === "" ? "" : brandAccount.socialTwitterFollowers); */
+  
 
 
   const handleSaveContinue = () => {
@@ -38,7 +38,7 @@ export const UnauthAddAccountBrandSocialsScreen: FC<UnauthAddAccountBrandSocials
     brandAccount.setProp("socialInstagram", brandAccountSocialInstagram);
     brandAccount.setProp("socialTikTok", brandAccountSocialTikTok);
     brandAccount.setProp("socialFacebookPage", brandAccountSocialFacebookPage);
-    // inputStore.addInput({ name:brandAccountSocialTwitter, email:brandAccountSocialLinkedInProfile });
+   
 
     if(brandAccountSocialTwitter){
       brandAccount.getFollowers(brandAccountSocialTwitter);/* 

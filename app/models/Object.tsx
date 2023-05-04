@@ -24,7 +24,13 @@ export const InputStoreModel = types
   .actions((store) => ({
     addInput(input: { new_id:string;new_name: string; new_websiteUrl: string;new_category:string;new_keywordPrimary:string;new_keywordSecondary:string;new_socialTwitter:string;
       new_socialLinkedInProfile:string;new_socialInstagram:string;new_socialTikTok:string;new_socialFacebookPage:string;new_socialTwitterFollowers:string }) {
-      store.inputList.push(input);
+        const existingInput = store.inputList.find((i) => i.new_id === input.new_id);
+        console.log(existingInput)
+        if (existingInput) {
+          Object.assign(existingInput, input);
+        } else {
+          store.inputList.push(input);
+        }
     },
     reset() {
       store.inputList.clear();

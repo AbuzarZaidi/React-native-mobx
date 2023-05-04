@@ -1,21 +1,48 @@
-import { destroy, Instance, SnapshotOut, types } from "mobx-state-tree";
-import { BrandAccount, BrandAccountModel } from "./BrandAccount";
+// ./src/stores/InputStore.ts
+import { types, Instance } from 'mobx-state-tree';
+import { api } from "../services/api"
+export const InputModel = types.model('InputModel', {
+    new_id: types.string,
+    new_name: types.string,
+    new_websiteUrl: types.string,
+    new_category: types.string,
+    new_keywordPrimary: types.string,
+    new_keywordSecondary: types.string,
+    new_socialTwitter: types.string,
+    new_socialLinkedInProfile: types.string,
+    new_socialInstagram: types.string,
+    new_socialTikTok: types.string,
+    new_socialFacebookPage: types.string,
+    new_socialTwitterFollowers: types.string,
+});
 
-export const BrandAccountListModel = types
-  .model("BrandAccountList")
+export const InputStoreModel = types
+  .model('InputStore')
   .props({
-    brandAccounts: types.optional(types.array(BrandAccountModel), [{name:"abuzar"}]),
+    inputList: types.optional(types.array(InputModel), []),
   })
   .actions((store) => ({
-    addBrandAccount(brandAccount: BrandAccount) {
-      console.log("addBrandAccount")
-      store.brandAccounts.push(brandAccount);
+    addInput(input: { new_id:string;new_name: string; new_websiteUrl: string;new_category:string;new_keywordPrimary:string;new_keywordSecondary:string;new_socialTwitter:string;
+      new_socialLinkedInProfile:string;new_socialInstagram:string;new_socialTikTok:string;new_socialFacebookPage:string;new_socialTwitterFollowers:string }) {
+        const existingInput = store.inputList.find((i) => i.new_id === input.new_id);
+        console.log(existingInput)
+        if (existingInput) {
+         
+          Object.assign(existingInput, input);
+        } else {
+          store.inputList.push(input);
+        }
     },
-    removeBrandAccount(brandAccount: BrandAccount) {
-      store.brandAccounts.remove(brandAccount);
+    reset() {
+      store.inputList.clear();
     },
-  }))
+    removeInput(id: string) {
+      const index = store.inputList.findIndex((input) => input.new_id === id);
+      if (index >= 0) {
+        store.inputList.splice(index, 1);
+      }
+    },
+  }));
 
-export interface BrandAccountList extends Instance<typeof BrandAccountListModel> {}
-export interface BrandAccountListSnapshotOut extends SnapshotOut<typeof BrandAccountListModel> {}
-// export interface BrandAccountListSnapshotIn extends SnapshotIn<typeof BrandAccountListModel> {}
+export type InputModelType = Instance<typeof InputModel>;
+export type InputStoreType = Instance<typeof InputStoreModel>;
